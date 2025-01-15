@@ -1,0 +1,104 @@
+SE
+-> Create Maven project:
+New file - Other - New maven project -> Arche type: org.apache.maven 
+Choose maven-archeytpe-quickstart of version 1.4
+Type the group id like com.app.demo, artifact id will be projectTitle, then click finish
+
+Right click project, click on run ass, then maven clean (deletes target folder and wait till confirmation in the terminal), do the same and now click maven install (compiles and makes byte code), now maven test (wait till BUILD SUCCESS), then click on maven build, in goal write clean install test (to mention the procedure for others to follow) with BUILD SUCCESSFUL you'll find a .jar file in target folder, finally run ass java application, youll get Hello World! in the terminal.
+
+While pushing to GitHub In .gitignore template choose Maven.
+
+-> Maven Web project: Choose maven-archetype-webapp version 1.4 (template)
+You'll find the html shit in index.jsp src>main>webapp
+In pom.xml u gotta add some dependencies, search for "Servlet api maven dependency" click on the javax.servlet link, click on version 2.5, copy the dependencies, paste it in the dependencies tag, and also can remove <scope> tag.
+Save all.
+Run as-> maven clean, maven install, maven test, maven build, goals: clean install test then apply then run. After build success war file will be created in target folder. Run as > Run on server. Select tomcat 9, next finish.
+
+
+paste In last but one line of tomcat-users.xml
+<role rolename="admin-gui,manager-gui,manager-
+script,manager-jmx,manager-status"/>
+<user username="admin"
+password="1234"roles="manager-gui, admin-gui
+,manager-script"/>
+
+Jenkins maven java
+Build
+-> git - put link and specify branch
+-> Invoke top level maven targets, create 2 of those, clean install
+-> Add post build options - archive the artifacts **/*
+-> Add post build options - Build other projects
+Test
+-> SCM: none
+-> Build environment: Delete workspace before build starts
+-> Add Build steps: Copy artifacts from another project (give name, artifacts to copy: **/*, latest files copy and stable build.
+-> Add build steps: import top level maven targets now goals is test
+-> Add post build actions: Archive the artifacts **/*
+New view - Build pipeline view
+Select initial job : Build project name now run!
+
+Jenkins maven web:
+Build
+-> git and branch
+-> Build trigger: Poll SCM ***** every 5 stars 1 min
+-> Build steps: Add maven targets: clean and install
+-> Post build steps: Archive **/*
+-> Post build steps: Build other projects and name test!
+Test
+-> Build env: delete workspace
+-> Build steps: Copy artifacts, build name, latest build, stable only, **/*
+-> Build steps: Maven target: test
+-> Post build: Archive **/* and Build other projects : Deploy name
+Deploy:
+Build Env: delete workspace
+build steps: Copy artifacts: test name, stable build only, **/*
+Post build: Deploy war/ear to container: **/*.war, Context path: samplewebprojectmaven  (just a name) add container (tomcat 9), credentials Jenkins, start tomcat 9 server in eclipse, In tomcat-users.xml, copy password and username in Jenkins. Credentails admin/*****, tomcat url is localhost:8083
+New view:
+Build pipeline,
+Initial job: build
+run, open tomcat in that ur, go to manange app select ur name given "samplewebprojectmaven" and click on it done!
+
+Jenkins declarative pipeline
+new item, pipeline
+Pipeline, "Pipeline script" copy paste script, save apply and build!
+after success
+configure > build triggers > Build periodically  H/15 * * * * (Build with or without changes unlike poll SCM which builds only when change)
+
+
+--------------------------------------------------------------------------------------------
+1. Use case ---> <<extends>> (optional) or <<includes>> (MUST)
+Place actors to the left and right of boundary, inside place use cases and connect
+Input and output lines must exist
+2. Class 1->* multiplicity (must) Association, generalization -|> when one class is using properties from another class.. give small text describing the reason for association over line
+
+------------------------------------
+AWS1
+EC2->Instances->Launch an Instance, t2.micro
+
+sudo apt update
+sudo apt-get install docker.io
+sduo apt install git
+sudo apt install nano
+
+put the index.html folder into a repository, clone it.
+cd Directory name
+git clone Ctrl+V
+
+nano Dockerfile
+
+FROM nginx:Alpine
+COPY . /usr/share/nginx/html
+
+save exit, "sudo docker build -t mywebapp ."
+sudo docker run -d -p 80:80 mywebapp 
+
+get public ipv4 from aws academy, paste with port.	
+
+------------------------
+FROM tomcat:9-jdk11
+COPY target/*.war /usr/local/tomcat/webapps/
+
+sudo docker run -d -p 9090:8080 mavenwebproject
+
+ipv4:9090\SampleMavenWebProject 
+If not go to instances > security > Edit inbound rules > add one with custom TCP and port 9090 with 0.0.0.0/0 > Save. 

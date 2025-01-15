@@ -1,0 +1,42 @@
+Docker
+docker --version
+docker pull <imgname> //eg redis 
+docker images //list of images
+docker run <imagename> //run the damn thing
+docker run --name newredis -d redis (-d is detachable)
+docker ps -a //all container and image ig and its status ... without -a running only
+docker stop <containerid>
+docker rm <containerid found in ps -a> //to delete a container
+docker rmi <imagename> 
+docker build -t <name> . //to convert it into image, I think this should run in cmd of that folder|
+//-t for tag, after this if u run docker images u can find the name there in the list
+docker exec -it newredis redis-cli or docker exec -it <containerid> bash
+	SET name "aaaa"
+	GET name
+	exit
+
+FROM redis:latest
+CMD ["redis-server"]
+
+//before committing stop the container
+docker commit <containerid> <username/imagename> //now youll find in docker desktop
+docker login
+docker push <username/imagename> //pushed to dockerhub
+docker rmi <username/imagename>
+docker pull <username/imagename>
+//after pulling u can run it now
+docker run --name myredisnew -d <username/imagename>
+docker logout
+
+-----
+
+docker pull ubuntu
+docker run -it --name newubuntu -d ubuntu
+docker exec -it <cid> bash
+apt update
+apt install git -y
+git --version
+exit
+docker stop <cid>
+
+

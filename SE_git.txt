@@ -1,0 +1,23 @@
+git config --global user.name "Your name"
+git config --global user.email "email"
+git init
+git status
+git commit -m "Added new features"
+git diff - difference between ur working directory and staging area
+git help <command>
+git branch <name> - creates branch
+git branch -a - List of all branches
+git branch -d <name>
+git checkout <name>
+git checkout -b <name> - creates and switches
+git merge <name>
+git log or git log --oneline
+git revert <commit_hash>
+git remote -v
+git remote add <name> <url>
+git remote remove <name>
+git clone <url>
+ls -ltr lists all files and also last modified
+git push origin main
+git pull origin masters
+git fork
